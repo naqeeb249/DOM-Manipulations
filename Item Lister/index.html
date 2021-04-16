@@ -17,18 +17,17 @@
     <div class="container">
         <div id = "main" class="card card-body">
             <h2 class="title">Add Items</h2>
-            <form class="form-inline mb-3">
-                <input type="text" class="col-xs-4">
+            <form id = "addForm" class="form-inline mb-3">
+                <input type="text" class="col-xs-4" id = "item">
                 <input type="submit" name="Submit" class="btn btn-dark btn-sm" >
             </form>
                 <h2 class="title">Items</h2>
                 <ul id="items" class="list-group">
-                    <li class="list-group-item">Item 1</li>
-                    <li class="list-group-item">Item 2</li>
-                    <li class="list-group-item">Item 3</li>
-                    <li class="list-group-item">Item 4</li>
-               
-                </ul>
+                    <li class="list-group-item">Item 1 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-primary edit">Edit</button></li>
+                    <li class="list-group-item">Item 2 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-primary edit">Edit</button></li>
+                    <li class="list-group-item">Item 3 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-primary edit">Edit</button></li>
+                    <li class="list-group-item">Item 4 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-primary edit">Edit</button></li>
+                  </ul>
         </div>
     </div>
 

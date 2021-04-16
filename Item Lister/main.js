@@ -61,13 +61,13 @@ for(let i=0; i<odd.length; i++){
     odd[i].style.backgroundColor = 'green';
 }  */
 
-let itemList = document.querySelector('#items');
+//let itemList = document.querySelector('#items');
 
 /* console.log(itemList.parentNode);
 itemList.parentNode.style.backgroundColor = 'grey';
 console.log(itemList.parentNode.parentNode.parentNode); */
 
-console.log(itemList.parentElement);
+/* console.log(itemList.parentElement);
 
 itemList.parentElement.style.backgroundColor = 'grey';
 console.log(itemList.parentElement.parentElement.parentElement);
@@ -121,3 +121,57 @@ let liText = document.createTextNode('Hello world');
 li.appendChild(liText);
 
 itemList.insertBefore(li,l1);
+ */
+
+let itemList = document.querySelector('#items');
+var form = document.getElementById('addForm');
+
+
+form.addEventListener('submit',addItem);
+itemList.addEventListener('click', deleteItem);
+itemList.addEventListener('click', editItem);
+
+
+function addItem(e){
+    e.preventDefault();
+    
+    let newItem = document.getElementById('item').value;
+    let li = document.createElement('li');
+    li.className = 'list-group-item';
+    li.appendChild(document.createTextNode(newItem));
+
+    let deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+    deleteBtn.appendChild(document.createTextNode('X'))
+   li.appendChild(deleteBtn);
+
+   let editBtn = document.createElement('button');
+   editBtn.className = 'btn btn-primary edit';
+   editBtn.appendChild(document.createTextNode('Edit'));
+   li.appendChild(editBtn);
+
+    itemList.appendChild(li);
+
+}
+
+
+function deleteItem(e){
+    e.preventDefault();
+    if(e.target.classList.contains('delete')){
+          if(confirm('Are you sure ?')){
+              let li = e.target.parentElement;
+              li.remove();
+          }
+    }
+}
+
+
+function editItem(e){
+    e.preventDefault();
+
+    if(e.target.classList.contains('edit')){
+     let input = document.getElementById('item')
+      input.value = e.target.parentElement.firstChild.textContent;
+     itemList.removeChild(e.target.parentElement)
+    }
+}
