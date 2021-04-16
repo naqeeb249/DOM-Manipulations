@@ -125,11 +125,13 @@ itemList.insertBefore(li,l1);
 
 let itemList = document.querySelector('#items');
 var form = document.getElementById('addForm');
+let filter = document.getElementById('filter');
 
 
 form.addEventListener('submit',addItem);
 itemList.addEventListener('click', deleteItem);
 itemList.addEventListener('click', editItem);
+filter.addEventListener('keyup',filterItems);
 
 
 function addItem(e){
@@ -138,7 +140,19 @@ function addItem(e){
     let newItem = document.getElementById('item').value;
     let li = document.createElement('li');
     li.className = 'list-group-item';
-    li.appendChild(document.createTextNode(newItem));
+
+     let newDesc = document.getElementById('itemDesc').value;
+     let dd = document.createElement('dd');
+    
+
+     let des = dd.appendChild(document.createTextNode(newDesc));
+    
+    let br = document.createElement('br');
+
+    li.appendChild(document.createTextNode(newItem)); 
+    
+  
+    
 
     let deleteBtn = document.createElement('button');
     deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
@@ -150,7 +164,11 @@ function addItem(e){
    editBtn.appendChild(document.createTextNode('Edit'));
    li.appendChild(editBtn);
 
+   li.appendChild(br);
+   li.appendChild(des);
+
     itemList.appendChild(li);
+    //itemList.appendChild(des);
 
 }
 
@@ -174,4 +192,30 @@ function editItem(e){
       input.value = e.target.parentElement.firstChild.textContent;
      itemList.removeChild(e.target.parentElement)
     }
+}
+
+function filterItems(e){
+    let items = document.getElementsByTagName('li');
+    let itemDesc = document.getElementsByTagName('dd');
+
+    let text = e.target.value.toLowerCase();
+
+    Array.from(items).forEach(function (item){
+        let itemName = item.firstChild.textContent;
+        if(itemName.toLowerCase().indexOf(text) != -1){
+            item.style.display = 'block';
+        }
+        else
+        item.style.display = 'none';
+    })
+
+    Array.from(itemDesc).forEach(function(itemDesc){
+        let desc = itemDesc.firstChild.textContent;
+        if(desc.toLowerCase().indexOf(text) != -1){
+            itemDesc.style.display = 'block';
+        }
+        else
+        itemDesc.style.display = 'none';
+    })
+
 }
